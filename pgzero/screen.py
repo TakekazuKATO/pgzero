@@ -102,6 +102,30 @@ class SurfacePainter:
             raise TypeError("screen.draw.filled_rect() requires a rect to draw")
         pygame.draw.rect(self._surf, make_color(color), rect, 0)
 
+    def ellipse(self, rect, color, width=1):
+        """Draw a ellipse."""
+        pygame.draw.ellipse(self._surf, make_color(color), rect, width)
+      
+    def filled_ellipse(self, rect, color):
+        """Draw a filled ellipse."""
+        pygame.draw.ellipse(self._surf, make_color(color), rect, 0)
+      
+    def arc(self, rect, start_angle, stop_angle, color, width=1):
+        """Draw a arc."""
+        pygame.draw.arc(self._surf, make_color(color), rect, start_angle, stop_angle, width)
+
+    def lines(self, pointlist, closed, color, width=1):
+        """Draw lines."""
+        pygame.draw.lines(self._surf, make_color(color), closed, pointlist, width)
+
+    def aaline(self, startpos, endpos, color, blend=1):
+        """Draw an anti aliased line."""
+        pygame.draw.aaline(self._surf, make_color(color), startpos, endpos, blend)
+
+    def aalines(self,pointlist, closed, color, blend=1):
+        """Draw anti aliased lines."""
+        pygame.draw.aalines(self._surf, make_color(color), closed, pointlist, blend)
+    
     def text(self, *args, **kwargs):
         """Draw text to the screen."""
         # FIXME: expose ptext parameters, for autocompletion and autodoc
