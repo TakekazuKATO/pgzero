@@ -41,15 +41,15 @@ class SurfacePainter:
         end = round_pos(end)
         pygame.draw.line(self._surf, make_color(color), start, end, width)
 
-    def circle(self, pos, radius, color, width=1):
+    def circle(self, pos, radius, color, width=1, **kwargs):
         """Draw a circle."""
         pos = round_pos(pos)
-        pygame.draw.circle(self._surf, make_color(color), pos, radius, width)
+        pygame.draw.circle(self._surf, make_color(color), pos, radius, width, **kwargs)
 
-    def filled_circle(self, pos, radius, color):
+    def filled_circle(self, pos, radius, color, **kwargs):
         """Draw a filled circle."""
         pos = round_pos(pos)
-        pygame.draw.circle(self._surf, make_color(color), pos, radius, 0)
+        pygame.draw.circle(self._surf, make_color(color), pos, radius, 0, **kwargs)
 
     def polygon(self, points, color, width=1):
         """Draw a polygon."""
@@ -69,13 +69,13 @@ class SurfacePainter:
         points = [round_pos(point) for point in points]
         pygame.draw.polygon(self._surf, make_color(color), points, 0)
 
-    def rect(self, rect, color, width=1):
+    def rect(self, rect, color, width=1, **kwargs):
         """Draw a rectangle."""
         if not isinstance(rect, RECT_CLASSES):
             raise TypeError("screen.draw.rect() requires a rect to draw")
 
         if width <= 1:
-            pygame.draw.rect(self._surf, make_color(color), rect, width)
+            pygame.draw.rect(self._surf, make_color(color), rect, width, **kwargs)
             return
 
         c = make_color(color)
@@ -89,18 +89,18 @@ class SurfacePainter:
 
         def r(x1, y1, x2, y2):
             r = pygame.Rect(x1, y1, x2 - x1, y2 - y1)
-            pygame.draw.rect(self._surf, c, r, 0)
+            pygame.draw.rect(self._surf, c, r, 0, **kwargs)
 
         r(l1, t1, r2, t2)  # top inclusive
         r(l1, t2, l2, b1)  # left exclusive
         r(r1, t2, r2, b1)  # right exclusive
         r(l1, b1, r2, b2)  # bottom inclusive
 
-    def filled_rect(self, rect, color):
+    def filled_rect(self, rect, color, **kwargs):
         """Draw a filled rectangle."""
         if not isinstance(rect, RECT_CLASSES):
             raise TypeError("screen.draw.filled_rect() requires a rect to draw")
-        pygame.draw.rect(self._surf, make_color(color), rect, 0)
+        pygame.draw.rect(self._surf, make_color(color), rect, 0, **kwargs)
 
     def ellipse(self, rect, color, width=1):
         """Draw a ellipse."""
