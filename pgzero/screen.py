@@ -51,14 +51,14 @@ class SurfacePainter:
         pos = round_pos(pos)
         pygame.draw.circle(self._surf, make_color(color), pos, radius, 0)
 
-    def polygon(self, points, color):
+    def polygon(self, points, color, width=1):
         """Draw a polygon."""
         try:
             iter(points)
         except TypeError:
             raise TypeError("screen.draw.filled_polygon() requires an iterable of points to draw") from None # noqa
         points = [round_pos(point) for point in points]
-        pygame.draw.polygon(self._surf, make_color(color), points, 1)
+        pygame.draw.polygon(self._surf, make_color(color), points, width)
 
     def filled_polygon(self, points, color):
         """Draw a filled polygon."""
